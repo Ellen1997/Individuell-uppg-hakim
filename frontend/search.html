@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hakim Livs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/96ad95103a.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.8.4/axios.min.js"
+      integrity="sha512-2A1+/TAny5loNGk3RBbk11FwoKXYOMfAK6R7r4CpQH7Luz4pezqEGcfphoNzB7SM4dixUoJsKkBsB6kg+dNE2g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    
+    <script src="scripts/search.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="scripts/index.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <a href="index.html" class="logo">
+          <img
+            src="Bilder/HAKIM LIVS.png"
+            alt="Hakim Livs logotyp"
+            class="logo"
+            width="300"
+        /></a>
+      </div>
+
+      <form class="search-container">
+        <input type="text" placeholder="Tryck enter för att söka..." class="search-input" />
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </form>
+      
+
+      <div class="loginUser">
+        <button id="userBtn">
+          <a href="#" id="openModalBtn" class="login">
+            <img src="Bilder/person.svg" alt="User icon" />
+            <span id="loginText">Logga in</span>
+          </a>
+        </button>
+      </div>
+
+      <div id="loginModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeModal" class="close">&times;</span>
+          <h2>VÄLKOMMEN</h2>
+          <form class="loginForm">
+            <input
+              type="email"
+              name="email-input-login"
+              id="email-input-login"
+              class="input email-input-login"
+              autocomplete="username"
+              placeholder="E-postadress"
+              required
+            />
+            <input
+              type="password"
+              name="password-input-login"
+              id="password-input-login"
+              class="input password-input-login"
+              autocomplete="current-password"
+              placeholder="Lösenord"
+              required
+            />
+            <button type="submit" class="loginBtn">Logga in</button>
+          </form>
+
+          <div class="modalLinks">
+            <button class="createAccountBtn btn" id="createAccountBtn">
+              Skapa Konto
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="createAccountModal" class="modal">
+        <div class="modalContainer">
+          <span id="closeCreateAccountModal" class="close">&times;</span>
+          <h2>SKAPA KONTO</h2>
+          <form id="registerForm">
+            <input
+              type="email"
+              id="email-input-register"
+              class="registerInput"
+              placeholder="E-postadress"
+              required
+            />
+            <input
+              type="text"
+              id="mobile-input-register"
+              class="registerInput"
+              placeholder="Mobilnummer"
+              required
+              autocomplete="tel"
+            />
+            <input
+              type="password"
+              id="password-input-register"
+              class="registerInput"
+              autocomplete="new-password"
+              placeholder="Lösenord"
+              required
+            />
+            <button type="submit" class="loginBtn">Registrera</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal" id="accountModal">
+        <div class="modalContainer" id="accountModalContainer">
+          <span id="closeAccountModal" class="close">&times;</span>
+          <h2>HÄRLIGT ATT DU ÄR TILLBAKA</h2>
+          <p>Klicka på länken nedan för att gå till dina sidor.</p>
+    <a href="/my-pages.html" class="button">Gå till Mina Sidor</a>
+
+          <button class="inlogBox" id="logoutBtn">Logga ut</button>
+        </div>
+      </div>
+
+      <button class="button shoppingcart">
+        <a href="shopping-cart.html" class="cart">
+          <span id="btn-text">Till kassan</span>
+          <i class="fa-solid fa-cart-shopping shoppingcart"></i>
+        </a>
+      </button>
+    </header>
+
+    <div class="productPage-mainContainer">
+      <aside class="sidebar">
+        <div class="meny">
+          <h3>ÖVERSIKT</h3>
+          <ul>
+            <li><a id="adminLink" href="/admin.html" style="display: none;">
+              <i class="fa-solid fa-shield-alt"></i> Admin Panel
+            </a></li>
+            <li><a href="index.html"><i class="fa-solid fa-list"></i> Alla produkter</a></li>
+            
+          </ul>
+        </div>
+        <div class="meny">
+          <h3>KATEGORIER</h3>
+          <ul>
+            <li><a href="mejeri.html"><i class="fa-solid fa-cow"></i> Mejeri</a></li>
+            <li><a href="kott.html"><i class="fa-solid fa-drumstick-bite"></i> Kött</a></li>
+            <li><a href="kolonial.html"><i class="fa-solid fa-bread-slice"></i> Kolonial</a></li>
+            <li><a href="vegetariskt.html"><i class="fa-solid fa-carrot"></i> Vegetariskt</a></li>
+            <li><a href="fryst.html"><i class="fa-solid fa-snowflake"></i> Fryst</a></li>
+            <li><a href="fardigratter.html"><i class="fa-solid fa-utensils"></i> Färdigrätter</a></li>
+            <li><a href="frukt.html"><i class="fa-solid fa-apple-whole"></i> Frukt</a></li>
+            <li><a href="gronsaker.html"><i class="fa-solid fa-seedling"></i> Grönsaker</a></li>
+            <li><a href="dricka.html"><i class="fa-solid fa-bottle-water"></i> Dricka</a></li>
+            <li><a href="snacks.html"><i class="fa-solid fa-cookie-bite"></i> Snacks</a></li>
+            <li><a href="glutenfritt.html"><i class="fa-solid fa-ban"></i> Glutenfritt</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="product-mainContainer">
+        <div class="product-header">
+          <h2>PRODUKTER</h2>
+        </div>
+        <div class="productCardsContainer"></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <p id="footer-rights">&copy; 2024 Hakim Livs. All rights reserved.</p>
+        <div class="footer-icons-container">
+          <a href="https://www.facebook.com/" class="footer-icons">
+            <img src="Bilder/facebook.svg" alt="Facebook icon" width="40px" />
+          </a>
+          <a href="https://www.instagram.com/" class="footer-icons">
+            <img
+              src="Bilder/instagram.svg"
+              alt="Instagram icon"
+              width="40px"
+            />
+          </a>
+          <a href="https://x.com/" class="footer-icons">
+            <img src="Bilder/x-twitter.svg" alt="Twitter icon" width="40px" />
+          </a>
+          <a href="https://www.google.com/" class="footer-icons">
+            <img src="Bilder/google.svg" alt="Goolge icon" width="40px" />
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

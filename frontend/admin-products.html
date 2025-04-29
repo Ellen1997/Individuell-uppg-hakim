@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Archivo:ital,wght@0,100..900;1,100..900&family=Comfortaa:wght@300..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fredoka:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Pen+Script&family=Quicksand:wght@300..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="scripts/admin-products.js" defer></script>
+    <script src="scripts/admin.js" defer></script>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Produktlista</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+            <img src="Bilder/HAKIM LIVS.png" alt="Hakim Livs logotyp" class="logo" width="300"/></a>
+        </div>
+        
+        <div class="loginUser">
+            <button id="userBtn">
+              <a href="#" id="openModalBtn" class="login">
+                <img src="Bilder/person.svg" alt="User icon" />
+                <span id="loginText">Hej Hakim!</span>
+              </a>
+            </button>
+          </div>
+        
+        <div class="modal" id="accountModal">
+            <div class="modalContainer" id="accountModalContainer">
+              <span id="closeAccountModal" class="close">&times;</span>
+              <h2>HÄRLIGT ATT DU ÄR HÄR, HAKIM!</h2>
+              
+    
+              <button class="inlogBox" id="logoutBtn">Logga ut</button>
+            </div>
+        </div>
+ 
+    </header>
+    <div class="admin-page-container">
+        <div class="admin-menu-container">
+            <div class="admin-menulinks-container">
+                <div class="admin-a-link-img-div">
+                    <img src="Bilder/home.png" alt="" width="20px">
+                    <a href="index.html" class="admin-menu-a-link">Hem (Hakim Livs)</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="Bilder/add.png" alt="" width="20px">
+                    <a href="admin.html" class="admin-menu-a-link">Hantera produkter och kategorier</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="Bilder/products.png" alt="" width="20px">
+                    <a href="admin-products.html" class="admin-menu-a-link">Produktlista</a>
+                </div>
+                <div class="admin-a-link-img-div">
+                    <img src="Bilder/orders.png" alt="" width="20px">
+                    <a href="admin-orders.html" class="admin-menu-a-link">Beställningar</a>
+                </div>
+            </div>
+        </div>
+        <div class="admin-add-new-product-container">
+            <div class="admin-title-container">
+                <h2 class="admin-h2-add">Produktlista</h2>
+            </div>
+
+            <form class="search-container">
+                <input type="text" placeholder="Tryck enter för att söka..." class="search-input" />
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </form>      
+
+            <div id="admin-all-products-container" class="products-list-container"></div>
+        </div>
+    </div>
+    <script>
+        window.onload = () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                window.location.href = "/";
+            } else {
+                const decodedToken = jwt_decode(token);
+                if (!decodedToken.isAdmin) {
+                    window.location.href = "/";
+                }
+            }
+        };
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const modal = document.getElementById("accountModal");
+          const openModalBtn = document.getElementById("openModalBtn");
+          const closeModalBtn = document.getElementById("closeAccountModal");
+          const logoutBtn = document.getElementById("logoutBtn");
+      
+          if (openModalBtn && modal && closeModalBtn && logoutBtn) {
+            openModalBtn.addEventListener("click", () => {
+              modal.style.display = "block";
+            });
+      
+            closeModalBtn.addEventListener("click", () => {
+              modal.style.display = "none";
+            });
+
+            logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("token");
+                document.getElementById("loginText").innerHTML = "Logga in";
+                modal.style.display = "none";
+                window.location.href = "/";
+            });
+          }
+        });
+      </script>
+</body>
+</html>
+
