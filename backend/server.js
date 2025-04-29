@@ -46,5 +46,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
+//YTTE PYTTE ÄNDRING FUNKAR ENS DETTA??
 
 module.exports = app;
