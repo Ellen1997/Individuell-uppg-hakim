@@ -5,7 +5,7 @@ const { AdminAnalytics } = require("../middleware/auth.js");
 
 const router = express.Router();
 
-router.get("/revenue-per-month", async (req, res) => {
+router.get("/revenue-per-month", AdminAnalytics, async (req, res) => {
   try {
     
     const now = new Date();
@@ -64,7 +64,7 @@ router.get("/revenue-per-month", async (req, res) => {
   }
 });
 
-router.get("/top-customers", async (req, res) => {
+router.get("/top-customers", AdminAnalytics, async (req, res) => {
   try {
     const customers = await Order.aggregate([
       {
