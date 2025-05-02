@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
@@ -23,4 +24,12 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-module.exports = { authenticateToken, isAdmin };
+const AdminAnalytics = (req, res, next) => {
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(404).sendFile(path.join(__dirname, ".." , "views", '404.html'));
+  }
+  next(); 
+}
+
+
+module.exports = { authenticateToken, isAdmin, AdminAnalytics };

@@ -7,6 +7,7 @@ const mongproductsRoute = require("./routes/mongproducts.js");
 const categorysRoute = require("./routes/categoryRoute.js")
 const auth = require("./routes/auth.js")
 const userOrders = require("./routes/userOrderRoute.js")
+const analyticsRoute = require('./routes/analyticsRoute');
 const path = require("path");
 
 
@@ -41,11 +42,11 @@ app.use("/api/products", mongproductsRoute);
 app.use("/api/category", categorysRoute);
 app.use("/api/users", auth);
 app.use("/api/orders", userOrders)
+app.use("/api/analytics", analyticsRoute);
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-//YTTE PYTTE ÄNDRING FUNKAR ENS DETTA??
 
 module.exports = app;
